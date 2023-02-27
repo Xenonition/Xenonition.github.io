@@ -1,7 +1,15 @@
 ---
+layout: page
 icon: fas fa-tag
-order: 2
+title: Resources
+order: 3
 ---
+<h3><b> Papers </b></h3>
+TODO
+
+<h3><b> Models </b></h3>
+TODO
+
 <h3><b> Motivation </b></h3>
 TODO
 

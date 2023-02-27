@@ -1,7 +1,15 @@
 ---
+layout: page
 icon: fas fa-archive
-order: 3
+title: Resources
+order: 4
 ---
+<h3><b> Papers </b></h3>
+TODO
+
+<h3><b> Models </b></h3>
+TODO
+
 <h3><b> Model Insights </b></h3>
 TODO
 
