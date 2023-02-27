@@ -4,21 +4,22 @@ icon: fas fa-tag
 title: Methods
 order: 3
 ---
-<h3><b> Papers </b></h3>
-TODO
+# Models
+## Linear Regression
+Our group initially attempted to predict future energy consumption and spending using a linear regression model created with Scikit-learn's linear regression functions. The model incorporated various parameters, including zone temperature, floor, outside air temperature, and time, but even after fine-tuning, the results were rough at best. The training and testing data were split approximately 70/30 between data before and after August 1, 2018, for this model, as well as for the decision tree and Prophet models. The training data constituted the first 69% of the total dataset, including data up to and including August 1st, while the remaining 31% included the data from August 2nd to January 9th, 2019. Timestamps were divided into year, month, day, hour, minute, second, and weekday. The linear regression was utilized to predict the energy column's values, and the mean squared error for the test data predictions was relatively low. While this method was not intended to be the final model, it was helpful in providing an example of column cleaning, thus expediting the creation of more complex predictive models in the future.
 
-<h3><b> Models </b></h3>
-TODO
+## Decision Tree
+After experimenting with linear regression, our group explored various predictive models, including the decision tree method. Creating this model was relatively easy due to the similar usage of Scikit-Learn in implementing the decision tree functionality. Working with the same data and transformations analyzed by the linear regressor (which included information about zone temperature, floor, outside air temperature, and time), our group was able to achieve a significantly improved mean squared error result of around 4.44. This value was obtained through repeated testing, with the regressor's max depth set to 7 and the minimum samples split to 5. Although this model's results were not perfect, it provided a stronger baseline that remains fully functional.
 
-<h3><b> Motivation </b></h3>
-TODO
+## Prophet
+The next three models we tested were non-Scikit-Learn based and more complex. One of these models is the open source Prophet model, which was developed by Facebook's Core Data Science team. This model makes time-series-based predictions using several seasonal trends, including monthly, weekly, and holiday trends (note: the data was not split to analyze yearly trends). The Prophet model is less diverse than the other models we tried because it uses only time series values (left as a timezone-naive timestamp) and the predictor variable (energy), leaving out other data such as humidity, temperature setpoints, and more. This model relies solely on the timestamps provided, which are flawed due to inconsistent time ranges, uneven timestamps, and missing data, as we noted earlier. Despite these downsides, we considered Prophet as an option because of its strengths, such as quick training times (2-3 minutes per run) and ease of generating future predictions using the make_future_dataframe method (we can specify the number of predictions and time intervals). This means the model can be easily retrained and evaluated for future data if we obtain it.
 
-<h3><b> Early Models </b></h3>
-TODO
+However, our hopes for the Prophet model were dashed when the mean squared error values ranged from 45 to over 275 based on the parameters and data included in the model. Our main hypothesis for this result is that Prophet's reliance on using only timestamp values led to inconsistent trends due to duplicate timestamps with different energy values in the original dataset. As a result, the Prophet model predicted a dramatic rise in energy values that is unlikely to occur in a real-world scenario. To make Prophet a viable model for this dataset, we would need to continue the data cleaning process by reducing the data to one energy value per timestamp, either by selecting a representative value or more likely by taking a sum for the building at a given timestamp.
 
-<h3><b> Final Model Selection </b></h3>
-TODO
+## Neural Net
+To prepare the data for the ANN model, we followed the same transformation process as the other models, by breaking it down into years, months, and other relevant features before standardizing it. We utilized the tensorflow and keras libraries to train the model to predict energy from the other data points. Our objective was to minimize the MSE, and we plotted the scores per epoch. Unfortunately, the model appeared to struggle with convergence, and we observed this in our results. While we attempted to measure accuracy, the resulting value was negative infinity, indicating a failure to calculate. It's clear that further fine-tuning is necessary for this model, but the amount of time required to fit it has made this a challenging task.
 
-<h3><b> Model Improvement </b></h3>
-TODO
+## Autoregression
+In this section, we explored the use of Vector Autoregression and regular Autoregression. The statsmodels library provided us with the necessary statistical tests and models. Initially, we performed data cleaning and transformations, followed by Granger causation, cointegration, and ADF tests to determine if the features would work well with the model. Although the Granger test yielded suspiciously good results and the other two displayed normal positive results, we proceeded after validating the order parameter. However, upon plotting the predicted values against actuals, we found that the model predicted mostly straight lines with some curves in the beginning, and did not identify any meaningful visual patterns. We attribute this to the large gaps in sensor readings.
 
+Moreover, intuitively, we do not expect energy to affect the power used by AHU, so we suspect that the vector autoregression may not have worked due to the lack of influence between the features and labels. As a test, we modeled a regular autoregressive model using a time frame with consistent sensor readings. However, this limited us to 51 data points, of which only 10 were used for testing. While the model's prediction correlated with actual values, it was nowhere near the true values. As a result, we will not use this model for the time being, but will revisit it once more data has been collected.
