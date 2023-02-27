@@ -1,7 +1,7 @@
 ---
 layout: page
 icon: fas fa-tag
-title: Resources
+title: Methods
 order: 3
 ---
 <h3><b> Papers </b></h3>

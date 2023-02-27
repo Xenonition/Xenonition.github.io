@@ -1,7 +1,7 @@
 ---
 layout: page
 icon: fas fa-archive
-title: Resources
+title: Results
 order: 4
 ---
 <h3><b> Papers </b></h3>

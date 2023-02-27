@@ -1,7 +1,7 @@
 ---
 layout: page
 icon: fas fa-book
-title: Resources
+title: Background
 order: 1
 ---
 <h3><b> Papers </b></h3>

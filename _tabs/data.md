@@ -1,7 +1,7 @@
 ---
 layout: page
 icon: fas fa-stream
-title: Resources
+title: Data
 order: 2
 ---
 <h3><b> Papers </b></h3>
