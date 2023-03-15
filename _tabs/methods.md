@@ -54,7 +54,7 @@ The other change we made for the sake of optimization was reducing temperature s
 
 It turns out that we had made a mistake, albeit not with our visualizations. Rather, the temperature setpoint value was very unimportant to the overall cost calculation, ending up as the fifth least important feature. Examining these model weights demonstrated the actual values (highlighted in orange) instead of the user-set values we changed (highlighted in yellow) were more important in the model. Looking at visualizations for the variables provides some further insight into this [11].
 
-![Graph](/assets/graphs.png)
+![Graph](/assets/graphs.PNG)
 
 Via Figure 11, the outside and zone temperatures both had very different distributions to the temperature setpoint, so those trends are likely more important to monitor than the temperature setpoint values for energy costs. Optimizing temperature likely involves figuring out how temperature setpoint can be made to more closely match zone temperature. More interestingly, the difference in the feature importances for the actual airflow values and the airflow setpoint values ended up surprising us and led us to reexamine our initial optimization work. We plotted a regression of the airflow values against each other to compare the two [12].
 
